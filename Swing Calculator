@@ -1,0 +1,64 @@
+import java.awt.*;
+import javax.swing.*;
+
+class form extends JFrame {
+    // Declaring components
+    JLabel l1, l2, l3, l4, l5;
+    JTextField tf1, tf2;
+    JTextArea ta;
+    JCheckBox cb1, cb2;
+    JComboBox jc;
+    JButton b;
+
+    form() {
+        // Getting the content pane for Swing components
+        Container c = getContentPane();
+        c.setLayout(new FlowLayout());
+
+        // Initializing Labels
+        l1 = new JLabel("Student 1st Name");
+        l2 = new JLabel("Student Last Name");
+        l3 = new JLabel("Address");
+        l4 = new JLabel("Hobbies");
+        l5 = new JLabel("Gender");
+
+        // Initializing Input Fields
+        tf1 = new JTextField(10);
+        tf2 = new JTextField(10);
+        ta = new JTextArea(10, 10);
+
+        // Initializing Checkboxes and Combobox
+        cb1 = new JCheckBox("A");
+        cb2 = new JCheckBox("B");
+        jc = new JComboBox();
+        jc.addItem("M");
+        jc.addItem("F");
+
+        // Initializing Button
+        b = new JButton("Submit");
+
+        // Adding components to the container
+        c.add(l1);
+        c.add(tf1);
+        c.add(l2);
+        c.add(tf2);
+        c.add(l3);
+        c.add(ta);
+        c.add(l4);
+        c.add(cb1);
+        c.add(cb2);
+        c.add(l5);
+        c.add(jc);
+        c.add(b);
+
+        // Frame settings
+        setSize(400, 400);
+        setVisible(true);
+        // Recommended addition:
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String args[]) {
+        new form();
+    }
+}
