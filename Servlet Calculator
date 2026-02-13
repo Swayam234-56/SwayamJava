@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator App</title>
+</head>
+<body>
+    <form action="CalculatorServlet" method="Post">
+        Enter First Number: <input type="text" name="txtN1"><br>
+        Enter Second Number: <input type="text" name="txtN2"><br>
+        
+        Select an Operation:<br>
+        <input type="radio" name="Opr" value="+"> ADDITION
+        <input type="radio" name="Opr" value="-"> SUBTRACTION
+        <input type="radio" name="Opr" value="*"> MULTIPLY
+        <input type="radio" name="Opr" value="/"> DIVIDE<br>
+        
+        <input type="reset" value="Reset">
+        <input type="submit" value="Calculate">
+    </form>
+</body>
+</html>
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class CalculatorServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        // Reading parameters from the form
+        double n1 = Double.parseDouble(request.getParameter("txtN1"));
+        double n2 = Double.parseDouble(request.getParameter("txtN2"));
+        String opr = request.getParameter("Opr");
+        double result = 0;
+
+        // Setting response type
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        // Calculation Logic
+        if (opr.equals("+")) {
+            result = n1 + n2;
+        } else if (opr.equals("-")) {
+            result = n1 - n2;
+        } else if (opr.equals("*")) {
+            result = n1 * n2;
+        } else if (opr.equals("/")) {
+            if (n2 != 0) {
+                result = n1 / n2;
+            } else {
+                out.println("<h3>Error: Cannot divide by zero</h3>");
+                return;
+            }
+        }
+
+        // Generating Output HTML
+        try {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Calculator Result</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Result = " + result + "</h1>");
+            out.println("<h1>Servlet Calculator at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {
+            out.close();
+        }
+    }
+}
