@@ -1,0 +1,64 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+class facto extends JFrame implements ActionListener {
+    JTextField jt1, jt2;
+    JLabel l1, l2;
+    JButton jb;
+
+    facto() {
+        // Set up the container and layout
+        Container c = getContentPane();
+        c.setLayout(new FlowLayout());
+
+        // Initialize components
+        l1 = new JLabel("Enter the No:");
+        jt1 = new JTextField(10);
+        
+        jb = new JButton("Calculate");
+        
+        l2 = new JLabel("Factorial:");
+        jt2 = new JTextField(10);
+        jt2.setEditable(false); // Recommended so users don't type in the result field
+
+        // Add action listener to button
+        jb.addActionListener(this);
+
+        // Add components to container
+        c.add(l1);
+        c.add(jt1);
+        c.add(jb);
+        c.add(l2);
+        c.add(jt2);
+
+        // Frame settings
+        setTitle("Factorial Calculator");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ensures program stops when closed
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent ae) {
+        try {
+            // Get number from text field
+            int number = Integer.parseInt(jt1.getText());
+            int fact = 1;
+
+            // Calculate factorial
+            for (int i = 1; i <= number; i++) {
+                fact = fact * i;
+            }
+
+            // Display the result
+            jt2.setText(String.valueOf(fact));
+            
+        } catch (NumberFormatException e) {
+            jt2.setText("Invalid Input");
+        }
+    }
+
+    public static void main(String args[]) {
+        new facto();
+    }
+}
