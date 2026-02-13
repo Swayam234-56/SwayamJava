@@ -1,0 +1,65 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class Test extends Frame implements ActionListener {
+    TextField t1, t2, t3;
+    Button b1, b2, b3, b4;
+
+    Test() {
+        // Corrected layout name to FlowLayout
+        setLayout(new FlowLayout());
+
+        t1 = new TextField(10);
+        t2 = new TextField(10);
+        t3 = new TextField(10);
+
+        // Added space between 'new' and 'Button'
+        b1 = new Button("Add");
+        b2 = new Button("Sub");
+        b3 = new Button("Mul");
+        b4 = new Button("Div");
+
+        // Fixed case sensitivity for addActionListener
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        b4.addActionListener(this);
+
+        add(t1);
+        add(t2);
+        add(b1);
+        add(b2);
+        add(b3);
+        add(b4);
+        add(t3);
+
+        setSize(400, 400);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent ae) {
+        String s = ae.getActionCommand();
+        // Parsing the input from text fields
+        int n1 = Integer.parseInt(t1.getText());
+        int n2 = Integer.parseInt(t2.getText());
+        int n = 0;
+
+        if (s.equals("Add")) {
+            n = n1 + n2;
+        } else if (s.equals("Sub")) {
+            n = n1 - n2;
+        } else if (s.equals("Mul")) {
+            n = n1 * n2;
+        } else {
+            // Basic division logic for the 'Div' button
+            n = n1 / n2;
+        }
+
+        // Converting result back to string to display in t3
+        t3.setText(String.valueOf(n));
+    }
+
+    public static void main(String args[]) {
+        new Test();
+    }
+}
